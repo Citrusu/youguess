@@ -1,5 +1,4 @@
 
-
     var canvasBox = document.getElementById("canvasBox"),
         $canvasBox = $(canvasBox),
         w = $(".canvas-container").width(),
