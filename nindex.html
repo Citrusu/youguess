@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="./css/index.css">
     <script src="http://cdn.hicitrus.com/js/vue.js"></script>
     <!--<script src="../vue/vue/dist/vue.js"></script>-->
     <script src="/socket.io/socket.io.js"></script>
@@ -28,11 +28,10 @@
 
 </body>
 <script>
-    var socket = io('localhost:3000');
     var msg = new Vue({
         el: '.content',
         data: {
-            msg: [],
+            msg: ['aa'],
         },
         methods: {
             send: function(){
@@ -41,6 +40,7 @@
         }
     });
 
+    var socket = io('localhost:3000');
     socket.on('connect', function(){
         console.log('connected!');
         document.title = 'connected';
@@ -68,5 +68,5 @@
 
 
 </script>
-<script src="/index.js"></script>
+<script src="./index.js"></script>
 </html>
