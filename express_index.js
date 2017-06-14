@@ -33,4 +33,13 @@ io.on('connection', function (socket) {
         console.log(data);
         socket.broadcast.emit('msg', data);
     });
+
+    socket.on('draw', function(data){
+        socket.broadcast.emit('draw', data);
+    });
+
+    socket.on('movePosition', function(data){
+        socket.broadcast.emit('movePosition', data);
+    })
 });
+
