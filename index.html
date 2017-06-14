@@ -15,45 +15,114 @@
         <link rel="stylesheet" type="text/css" href="css/actui.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <script src="/socket.io/socket.io.js"></script>
-    <body>
+    </head>
+    <body ontouchmove="event.preventDefault()">
+        <div class="ui-content">
  
-        <!-- 头部 -->
-        <header class="header-container ui-cell">
-            <div class="ui-cell-primary">
-                <p class="ui-text-center title-text">虫儿飞</p>
-            </div>
-        </header>
+            <!-- 头部 -->
+            <header class="header-container ui-cell">
+                <div class="header-left ui-abs ui-text-center ui-cell">
+                    <span class="times-text J-times-wrap"></span> <!--  倒计时  -->
+                </div>
+                <div class="ui-cell-primary">
+                    <p class="ui-text-center title-text">虫儿飞</p>
+                </div>
+            </header>
 
-        <!-- 画图区域 -->
-        <article class="article-container">
-            <!-- canvas -->
-            <section class="canvas-container">
-                <canvas id="canvasBox">你的浏览器暂不支持canvas</canvas>
-            </section>
-            <!-- 提示 -->
-            <div class="article-top ui-cell">
-                <div class="ui-cell-primary">游戏中，请先围观</div>
-                <div class="ui-text-right">1号正在画...</div>
+            <!-- 画图区域 -->
+            <article class="article-container">
+                <!-- canvas -->
+                <section class="canvas-container">
+                    <canvas id="canvasBox">你的浏览器暂不支持canvas</canvas>
+                </section>
+                <!-- 提示 -->
+                <div class="article-top ui-cell">
+                    <div class="ui-cell-primary">游戏中...</div>
+                    <div class="ui-text-right J-tips-text">1号正在画...</div>
+                </div>
+                <!-- 菜单 -->
+                <div class="set-wrap ui-abs ui-text-right" style="display: none;">
+                    <i class="iconfont icon-tubiao2huabiyanse"></i>
+                </div>
+                <!-- 隐藏工具栏 -->
+                <div class="tool-container ui-abs" style="display: none;">
+                    <div class="tool-top-wrap ui-cell ui-text-center">
+                        <div class="ui-cell-primary tool-top-list brush-clear ui-cell">
+                            <div class="ui-cell ui-text-center">
+                                <i class="iconfont icon-xitonglajitong"></i>
+                                <span class="tool-text">清除</span>
+                            </div>
+                        </div>
+                        <div class="ui-cell-primary tool-top-list brush-little ui-cell tool-active J-brush-size" data-size="1">
+                            <div class="ui-cell">
+                                <div class="top-icon"></div>
+                                <span class="tool-text">细</span>
+                            </div>
+                        </div>
+                        <div class="ui-cell-primary tool-top-list brush-middle ui-cell J-brush-size" data-size="3">
+                            <div class="ui-cell">
+                                <div class="top-icon"></div>
+                                <span class="tool-text">中</span>
+                            </div>
+                        </div>
+                        <div class="ui-cell-primary tool-top-list brush-big ui-cell J-brush-size" data-size="5">
+                            <div class="ui-cell">
+                                <div class="top-icon"></div>
+                                <span class="tool-text">粗</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tool-bottom-wrap"></div>
+                </div>
+            </article>
+            
+            <!-- 底部 -->
+            <footer class="footer-container">
+                <!-- 聊天记录 -->
+                <div class="footer-top">
+                </div>
+                <!-- 输入框 -->
+                <div class="footer-bottom">
+                    
+                </div>
+            </footer>
+        </div>
+
+        <!-- popup, panel 等放在这里 -->
+        <div class="panel-overlay">
+        <!--  提交绘画名称弹窗 start  -->
+            <div class="act-pop" id="name-popup" style="display: none;">
+                <div class="act-pop-mask"></div>
+                <div class="act-pop-box scale-pop">
+                    <dvi class="act-pop-middle ui-text-center">
+                        <div class="act-pop-content" style="background-color: #fff;">
+                            <p class="pop-title-text">请输入你绘画物体的名称</p>
+                            <input class="input-wrap ui-text-center J-submit-name" type="text" placeholder="请输入名称" />
+                            <div class="submit-btn">确认</div>
+                        </div>
+                    </dvi>
+                </div>
             </div>
-            <div class="set-wrap ui-abs ui-text-right">
-                <i class="iconfont icon-tubiao2huabiyanse"></i>
+        </div>
+        <!--  提交绘画名称弹窗 end  -->
+
+
+        <!--  提交已猜名称 弹窗 start  -->
+            <div class="act-pop" id="submit-guessname" style="display: none;">
+                <div class="act-pop-mask"></div>
+                <div class="act-pop-box scale-pop">
+                    <dvi class="act-pop-middle ui-text-center">
+                        <div class="act-pop-content" style="background-color: #fff;">
+                            <p class="pop-title-text">请输入你猜到的名称</p>
+                            <input class="input-wrap ui-text-center J-submit-guessname" type="text" placeholder="请输入答案" />
+                            <div class="submit-btn">确认</div>
+                        </div>
+                    </dvi>
+                </div>
             </div>
-            <div class="tool-container ui-abs" style="display: none;">
-                
-            </div>
-        </article>
-        
-        <!-- 底部 -->
-        <footer class="footer-container">
-            <!-- 聊天记录 -->
-            <div class="footer-top">
-                
-            </div>
-            <!-- 输入框 -->
-            <div class="footer-bottom">
-                
-            </div>
-        </footer>
+        </div>
+        <!--  提交已猜名称 弹窗 end  -->
+
     </body>
     <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
