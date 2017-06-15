@@ -81,6 +81,12 @@
     font-size: 2rem;
     color: #30863e;
 }
+.tool-wrap,.tool-wrap .tool-mask {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 .tool-container {
     bottom: 0;
     padding: 0 .7rem;

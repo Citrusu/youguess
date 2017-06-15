@@ -178,6 +178,24 @@ $(".J-brush-size").on("click",function(){
     $(this).addClass("tool-active")
            .siblings().removeClass("tool-active");
     ctx.lineWidth = config.size;
+    hideTool();
+});
+
+// 
+$(".tool-mask,.set-wrap").on("click",function(){
+    hideTool();
+});
+
+// 隐藏工具栏
+function hideTool(){
+    $(".tool-wrap").toggle();
+    $(".set-wrap").toggle();
+}
+
+//清除画板
+$(".J-clear-rect").on("click",function(){
+    ctx.clearRect(0,0,config.w,config.h);
+    hideTool();
 });
 
 /*
