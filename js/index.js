@@ -1,19 +1,19 @@
 var canvasBox = document.getElementById("canvasBox"),//canvas
     $canvasWrap = $(".canvas-container"),//canvas容器 
     $canvasBox = $(canvasBox),//canvas
-    $tips = $(".J-tips-text"),
+    $tips = $(".J-tips-text"),//提示
     $times = $(".J-times-wrap");//倒计时
 var config = {
-    userstatus: true,
-    username: " ",
-    w: $canvasWrap.width(),
-    h: $canvasWrap.height(),
-    gamestatus: true,
-    color: "green",
-    size: 1,
-    time: 60,
-    name: null,
-    timer: null,
+    userstatus: true,//画笔开放，允许绘画
+    username: " ",//用户名称
+    w: $canvasWrap.width(),//画布宽度
+    h: $canvasWrap.height(),//画布高度
+    gamestatus: true,//游戏状态
+    color: "green",//画笔颜色
+    size: 1,//画笔大小
+    time: 60,//一局游戏时间
+    name: null,//绘画的物体名字
+    timer: null,//计时器
     rect: canvasBox.getBoundingClientRect()
 };
 var socket = io('localhost:3000');
