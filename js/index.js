@@ -4,8 +4,8 @@ var canvasBox = document.getElementById("canvasBox"),//canvas
     $tips = $(".J-tips-text"),
     $times = $(".J-times-wrap");//倒计时
 var config = {
-    userid: true,
-    username: "虫儿飞",
+    userstatus: true,
+    username: " ",
     w: $canvasWrap.width(),
     h: $canvasWrap.height(),
     gamestatus: true,
@@ -13,9 +13,10 @@ var config = {
     size: 1,
     time: 60,
     name: null,
+    timer: null,
     rect: canvasBox.getBoundingClientRect()
 };
-var socket = io('192.168.9.113:3000');
+var socket = io('localhost:3000');
 var ctx = canvasBox.getContext("2d");
 function init(){
     canvasBox.width = config.w;
@@ -27,7 +28,7 @@ function init(){
 }
 init();
 
-if(config.userid && config.gamestatus){
+if(config.userstatus && config.gamestatus){
     // 手指按下屏幕
     $canvasBox.on("touchstart", function (event) {
         if(config.gamestatus){
@@ -47,6 +48,23 @@ if(config.userid && config.gamestatus){
     });
 }
 
+//获取手按压的坐标
+function getTouch(event){
+    var touch = event.originalEvent.targetTouches[0];//获取第一个手指头信息
+    return {
+        x: touch.clientX - config.rect.left,
+        y: touch.clientY - config.rect.top
+    }
+}
+
+//绘制路径
+function drawPath(x,y) {
+    if(config.gamestatus){
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+}
+
 // 提示信息
 function tipsText(val){
     $tips.text(val);
@@ -56,24 +74,36 @@ function tipsText(val){
 function gameStart(){
     config.gamestatus = true;
     tipsText(config.username+"正在绘画...");
+    $(".J-end-drawing").show();
     var s = config.time;
-    var timer = setInterval(function(){
+    config.timer = setInterval(function(){
         if( s <= 0 ){
             s = config.time;
-            clearInterval(timer);
-            $times.text(" ");
-            $("#name-popup").show();
-            tipsText(config.username+"正在提交名称...");
+            endDrawing();
             return false;
         }
         $times.text(s);
         s--;
     },1000);
 }
-gameStart();
+// gameStart();
+
+// 结束绘画
+function endDrawing(){
+    clearInterval(config.timer);
+    $times.text(" ");
+    $("#name-popup").show();
+    tipsText(config.username+"正在提交名称中，请稍后...");
+    $(".J-end-drawing").hide();
+}
+
+//结束绘画按钮
+$(".J-end-drawing").on("click",function(){
+    endDrawing();
+});
 
 // 绘画完成后提交正确答案
-$(".submit-btn").on("click",function(){
+$(".J-submit-answer").on("click",function(){
     var name = $(".J-submit-name").val();
     if( name.length <= 0 ){
         alert("名称不能为空！");
@@ -121,22 +151,18 @@ function isGuess(){
     },10000);
 }
 
-//获取手按压的坐标
-function getTouch(event){
-    var touch = event.originalEvent.targetTouches[0];//获取第一个手指头信息
-    return {
-        x: touch.clientX - config.rect.left,
-        y: touch.clientY - config.rect.top
+//提交昵称
+$(".J-submit-nickname").on("click",function(){
+    var nickname = $(".J-nickname-val").val();
+    if(nickname.length <= 0){
+        alert("昵称不能够为空哦！");
+        return false;
     }
-}
-
-//绘制路径
-function drawPath(x,y) {
-    if(config.gamestatus){
-        ctx.lineTo(x, y);
-        ctx.stroke();
-    }
-}
+    config.username = nickname;
+    $(".J-user-name").text(config.username);
+    $("#nickname-popup").hide();
+    gameStart();
+});
 
 /*
 * socket

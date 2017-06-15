@@ -63,6 +63,7 @@
 .footer-bottom {
     position: absolute;
     bottom: 0;
+    padding: 0;
     width: 100%;
     height: 20%;
     background-color: #fff;
@@ -165,6 +166,24 @@
     padding: .4rem 0;
     border-radius: 4px;
     background-color: #53a45a;
+    color: #fff;
+    font-size: .7rem;
+}
+/*  结束绘画  */
+.end-btn {
+    position: relative;
+    margin: 0 auto;
+    width: 80%;
+    height: 70%;
+    background-color: #53a45a;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+.end-btn-text {
+    margin: 0 auto;
     color: #fff;
     font-size: .7rem;
 }

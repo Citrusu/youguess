@@ -25,7 +25,7 @@
                     <span class="times-text J-times-wrap"></span> <!--  倒计时  -->
                 </div>
                 <div class="ui-cell-primary">
-                    <p class="ui-text-center title-text">虫儿飞</p>
+                    <p class="ui-text-center title-text J-user-name">用户昵称</p>
                 </div>
             </header>
 
@@ -38,7 +38,7 @@
                 <!-- 提示 -->
                 <div class="article-top ui-cell">
                     <div class="ui-cell-primary">游戏中...</div>
-                    <div class="ui-text-right J-tips-text">1号正在画...</div>
+                    <div class="ui-text-right J-tips-text"></div>
                 </div>
                 <!-- 菜单 -->
                 <div class="set-wrap ui-abs ui-text-right" style="display: none;">
@@ -82,14 +82,34 @@
                 <div class="footer-top">
                 </div>
                 <!-- 输入框 -->
-                <div class="footer-bottom">
-                    
+                <div class="footer-bottom ui-cell">
+                    <div class="end-btn ui-text-center J-end-drawing" style="display: none;">
+                        <p class="end-btn-text">结束绘画</p>
+                    </div>
                 </div>
             </footer>
         </div>
 
         <!-- popup, panel 等放在这里 -->
         <div class="panel-overlay">
+
+        
+        <!--  提交用户名称弹窗 start  -->
+            <div class="act-pop" id="nickname-popup" style="display: ;">
+                <div class="act-pop-mask"></div>
+                <div class="act-pop-box scale-pop">
+                    <dvi class="act-pop-middle ui-text-center">
+                        <div class="act-pop-content" style="background-color: #fff;">
+                            <p class="pop-title-text">请输入你的昵称</p>
+                            <input class="input-wrap ui-text-center J-nickname-val" type="text" placeholder="请输入昵称" maxlength="8" />
+                            <div class="submit-btn J-submit-nickname">确认</div>
+                        </div>
+                    </dvi>
+                </div>
+            </div>
+        </div>
+        <!--  提交用户名称弹窗 end  -->
+
         <!--  提交绘画名称弹窗 start  -->
             <div class="act-pop" id="name-popup" style="display: none;">
                 <div class="act-pop-mask"></div>
@@ -98,7 +118,7 @@
                         <div class="act-pop-content" style="background-color: #fff;">
                             <p class="pop-title-text">请输入你绘画物体的名称</p>
                             <input class="input-wrap ui-text-center J-submit-name" type="text" placeholder="请输入名称" />
-                            <div class="submit-btn">确认</div>
+                            <div class="submit-btn J-submit-answer">确认</div>
                         </div>
                     </dvi>
                 </div>
@@ -115,7 +135,7 @@
                         <div class="act-pop-content" style="background-color: #fff;">
                             <p class="pop-title-text">请输入你猜到的名称</p>
                             <input class="input-wrap ui-text-center J-submit-guessname" type="text" placeholder="请输入答案" />
-                            <div class="submit-btn">确认</div>
+                            <div class="submit-btn J-submit-guess">确认</div>
                         </div>
                     </dvi>
                 </div>
