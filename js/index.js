@@ -33,6 +33,7 @@ if(config.userstatus && config.gamestatus){
     $canvasBox.on("touchstart", function (event) {
         if(config.gamestatus){
             var p = getTouch(event);
+            ctx.beginPath()
             ctx.moveTo(p.x, p.y);
             socket.emit('movePosition', p);
         }
@@ -46,6 +47,8 @@ if(config.userstatus && config.gamestatus){
             socket.emit('draw', p);
         }
     });
+
+
 }
 
 //获取手按压的坐标
@@ -162,6 +165,19 @@ $(".J-submit-nickname").on("click",function(){
     $(".J-user-name").text(config.username);
     $("#nickname-popup").hide();
     gameStart();
+});
+
+//修改画笔粗细
+$(".J-brush-size").on("click",function(){
+    var size = $(this).attr("data-size");
+    if(size == " "){
+        alert("点击错误！");
+        return false;
+    }
+    config.size = size;
+    $(this).addClass("tool-active")
+           .siblings().removeClass("tool-active");
+    ctx.lineWidth = config.size;
 });
 
 /*
