@@ -1,45 +1,34 @@
 /**
  * Created by Citrus on 2017/6/13.
  */
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('./server/socket')(server);
+const fs = require('fs');
 
-server.listen(3000);
+const config = require('./server/config');
+
+server.listen(config.port, () => {
+    console.log(`server listening prot ${config.port}`);
+});
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/js/index.js', function (req, res) {
-    res.sendFile(__dirname + '/js/index.js');
-});
 
-app.get('/css/index.css', function (req, res) {
-    res.sendFile(__dirname + '/css/index.css');
-});
-
-app.get('/css/actui.css', function (req, res) {
-    res.sendFile(__dirname + '/css/actui.css');
-});
-
-io.on('connection', function (socket) {
-    console.log('conected');
-    socket.emit('news', 'conected');
-    socket.on('news', function(data){
-        console.log(data);
-    });
-    socket.on('msg', function (data) {
-        console.log(data);
-        socket.broadcast.emit('msg', data);
-    });
-
-    socket.on('draw', function(data){
-        socket.broadcast.emit('draw', data);
-    });
-
-    socket.on('movePosition', function(data){
-        socket.broadcast.emit('movePosition', data);
+//处理其它资源
+app.use((req, res) => {
+    let url = req.url;
+    fs.stat(__dirname + url, function(err){
+        if(err){
+            console.log(`404 not found ${url}`);
+            res.sendStatus(404);
+        }else{
+            //console.log('ok');
+            res.sendFile(__dirname + url);
+        }
     })
 });
+
 
