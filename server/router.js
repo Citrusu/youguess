@@ -6,7 +6,7 @@ const router = function (root, app) {
     const rootDir = root;
 
     app.get('/', function (req, res) {
-        res.sendFile(rootDir + '/index.html');
+        res.sendFile(rootDir + '/views/index.html');
     });
 
     //处理其它资源
